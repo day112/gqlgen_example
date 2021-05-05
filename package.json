@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "apollo-upload-client": "^14.1.3"
+  }
+}

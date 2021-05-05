@@ -1,0 +1,52 @@
+type TeacherInfo {
+  id: Int!
+  name: String!
+  avatar: String!
+  info: String!
+  score: Float!
+  role: Int!
+  teacherScore: [TeacherScore]
+}
+type TeacherScore {
+  id: Int!
+  t_id: Int!
+  comment: String!
+  u_id: Int!
+  score: Float!
+}
+
+input Parms {
+  name: String!
+  role: Int!
+}
+
+type Query {
+  teacherInfo: [TeacherInfo!]!
+  teacherScore(id: Int!): TeacherInfo!
+  searchTeacherInfos(req: Parms!): [TeacherInfo]
+}
+
+input updateInfo {
+  id: Int!
+  name: String!
+  avatar: String!
+  info: String!
+}
+
+input insertInfo {
+  name: String!
+  avatar: String
+  info: String!
+}
+
+#scalar Upload
+#scalar B
+
+type Mutation {
+  updateTeacherInfo(req: updateInfo!): TeacherInfo!
+  insertTeacherInfo(req: insertInfo): [TeacherInfo]!
+
+# 上传文件
+#  singleUpload(file: Upload!): B
+}
+
