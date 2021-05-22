@@ -9,6 +9,7 @@ import (
 	"github.com/lk/graphql_demo/dao"
 	"github.com/lk/graphql_demo/graph/generated"
 	"github.com/lk/graphql_demo/graph/model"
+	"log"
 )
 
 func (r *mutationResolver) UpdateTeacherInfo(ctx context.Context, req model.UpdateInfo) (*model.TeacherInfo, error) {
@@ -27,10 +28,10 @@ func (r *mutationResolver) InsertTeacherInfo(ctx context.Context, req *model.Ins
 	var teacherInfo []*model.TeacherInfo
 	dao.DB.Preload("TeacherScore").Find(&teacherInfo)
 
-	//err := dao.ES.BatchAdd(ctx, teacherInfo)
-	//if err != nil {
-	//	log.Panicf("批量添加失败：%s", err)
-	//}
+	err := dao.ES.BatchAdd(ctx, teacherInfo)
+	if err != nil {
+		log.Panicf("批量添加失败：%s", err)
+	}
 
 	fmt.Println("插入ID：", insert.ID)
 	return teacherInfo, nil

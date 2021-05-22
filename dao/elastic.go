@@ -40,7 +40,10 @@ type UserES struct {
 var ES *UserES
 
 func NewEsClient() *elastic.Client {
-	url := fmt.Sprintf("http:"+"//%s:%s", os.Getenv("HOST"), os.Getenv("ES_PORT"))
+	url := fmt.Sprintf("http:"+"//%s:%s", os.Getenv("ES_HOST"), os.Getenv("ES_PORT"))
+
+	fmt.Println("********", url)
+
 	client, err := elastic.NewClient(
 		//elastic 服务地址
 		elastic.SetURL(url),
